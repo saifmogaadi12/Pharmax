@@ -1,13 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+require("dotenv").config();
 
 const db = require("./app/models");
-const Role = db.role;
+const Role = db.role;/*
 db.sequelize.sync({force: true}).then(() => {
   console.log('Drop and Resync Db');
   initial();
 });
+*/
+db.sequelize.sync();
 
 
 function initial() {
@@ -43,7 +46,7 @@ app.get("/", (req, res) => {
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.NODE_DOCKER_PORT  || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
