@@ -3,7 +3,7 @@ import { TokenStorageService } from './_services/token-storage.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['../assets/css/style.css']
 })
 export class AppComponent implements OnInit {
   private roles: string[] = [];
