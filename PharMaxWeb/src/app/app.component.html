@@ -1,38 +1,64 @@
 <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">PharMax</a>
-      <ul class="navbar-nav mr-auto" routerLinkActive="active">
-        <li class="nav-item">
-          <a href="/home" class="nav-link" routerLink="home">Home </a>
-        </li>
-        <li class="nav-item" *ngIf="showAdminBoard">
-          <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-        </li>
-        <li class="nav-item" *ngIf="showModeratorBoard">
-          <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-        </li>
-        <li class="nav-item">
-          <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-        <li class="nav-item">
-          <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-        </li>
-        <li class="nav-item">
-          <a href="/login" class="nav-link" routerLink="login">Login</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-        <li class="nav-item">
-          <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
-        </li>
-        <li class="nav-item">
-          <a href class="nav-link" (click)="logout()">LogOut</a>
-        </li>
-      </ul>
-    </nav>
-    <div class="container">
-      <router-outlet></router-outlet>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="logo">
+        <h1><a href="index.html"><span>PharMax</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="/home#about">About</a></li>
+          <li><a class="nav-link scrollto" href="/home#RendezVous">Rendez Vous</a></li>
+          <li><a class="nav-link scrollto" href="/home#gallery">Gallery</a></li>
+          <li><a class="nav-link scrollto" href="/home#team">Team</a></li>
+          <li><a class="nav-link scrollto" href="/home#pricing">Pricing</a></li>
+          <li><a class="nav-link scrollto" href="/home#contact">Contact</a></li>
+
+          <ul class="navbar-nav mr-auto" routerLinkActive="active">
+            <li class="nav-item">
+              <a href="/home" class="nav-link" routerLink="home">Home </a>
+              
+            </li>
+            <li class="nav-item" *ngIf="showAdminBoard">
+              <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+            </li>
+            <li class="nav-item" *ngIf="showModeratorBoard">
+              <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+            </li>
+          </ul>
+
+          <li class="nav-item">
+            <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Doc Area</a>
+          </li>
+
+
+          <li class="nav-item">
+            <a href="/profile" class="nav-link" *ngIf="isLoggedIn" routerLink="profile">{{ username }}</a>
+          </li>
+          <li class="nav-item">
+            <a href class="nav-link" *ngIf="isLoggedIn" (click)="logout()">LogOut</a>
+          </li>
+
+
+          <li *ngIf="!isLoggedIn" class="nav-item">
+            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+          </li>
+          <li *ngIf="!isLoggedIn" class="nav-item">
+            <a href="/login" class="nav-link" routerLink="login">Login</a>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
+  </header><!-- End Header -->
+
+  <div class="container">
+    <router-outlet></router-outlet>
   </div>
+</div>
