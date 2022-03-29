@@ -123,7 +123,8 @@ This is an example of how to list things you need to use the software and how to
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. cd to loginBack directory and run:     ```sh
+1. cd to loginBack directory and run:     
+   ```sh
    docker compose-up
    ``` 
 2. Install NPM packages
