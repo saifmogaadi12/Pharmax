@@ -8,21 +8,14 @@
       </h3>
     </header>
     <p>
-      <strong>Token:</strong>
-      {{ currentUser.accessToken.substring(0, 20) }} ...
-      {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
-    </p>
-    <p>
       <strong>Email:</strong>
       {{ currentUser.email }}
     </p>
-    <strong>Roles:</strong>
-    <ul>
-      <li *ngFor="let role of currentUser.roles">
-        {{ role }}
-      </li>
-    </ul>
+    <button type="button" class="btn btn-danger" [disabled]=" showAdminBoard || showModeratorBoard">Delete account</button>
+
   </div>
   <ng-template #loggedOut>
     Please login.
+
+
   </ng-template>

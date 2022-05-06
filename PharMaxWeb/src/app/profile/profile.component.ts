@@ -7,8 +7,14 @@ import { TokenStorageService } from '../_services/token-storage.service';
 })
 export class ProfileComponent implements OnInit {
   currentUser: any;
+  private roles: string[] = [];
+  showAdminBoard = false;
+  showModeratorBoard = false;
   constructor(private token: TokenStorageService) { }
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
+    this.roles = this.currentUser.roles;
+    this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+    this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
   }
 }
