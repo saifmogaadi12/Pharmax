@@ -42,4 +42,7 @@ export class LoginComponent implements OnInit {
   reloadPage(): void {
     window.location.assign('/user');
   }
+  backError():void{
+    window.location.assign('/error-page');
+  }
 }

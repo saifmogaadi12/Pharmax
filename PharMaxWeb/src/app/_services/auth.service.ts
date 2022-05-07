@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const AUTH_API = 'http://localhost:6868/api/auth/';
@@ -11,7 +11,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient  ) { 
+
+    console.log(this.http.get<any>("http://localhost:6868/").subscribe(data => {
+        console.log(data);
+    },
+    (error)=>{
+      console.error('error Caught in compo');
+    }
+    ));
+  }
   login(username: string, password: string): Observable<any> {
     return this.http.post(AUTH_API + 'signin', {
       username,
@@ -24,5 +33,17 @@ export class AuthService {
       email,
       password
     }, httpOptions);
+  }
+  testConn(): boolean{
+    console.log(this.http.get<any>("http://localhost:6868/").subscribe(data => {
+        console.log(data);
+    },
+    (error)=>{
+      console.error('error Caught in compo');
+      return true;
+    }
+    ));
+
+    return false;
   }
 }

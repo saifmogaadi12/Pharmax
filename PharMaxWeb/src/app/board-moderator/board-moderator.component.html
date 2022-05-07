@@ -1,1 +1,10 @@
+
+
+
+<br><br><br><br>
+<div *ngIf="showModeratorBoard">
 <p>board-moderator works!</p>
+</div>
+<div *ngIf="!showModeratorBoard">
+    {{notAllowed()}}
+    </div>

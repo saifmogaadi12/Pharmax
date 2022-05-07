@@ -13,6 +13,8 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { APP_BASE_HREF } from '@angular/common';
+import { ErrorpageComponent } from './errorpage/errorpage.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -23,13 +25,15 @@ import { APP_BASE_HREF } from '@angular/common';
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    ErrorpageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RecaptchaModule
   ],
   providers: [authInterceptorProviders,{provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
