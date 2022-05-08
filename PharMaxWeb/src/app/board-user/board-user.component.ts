@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-board-user',
   templateUrl: './board-user.component.html',
@@ -11,5 +12,11 @@ export class BoardUserComponent implements OnInit {
 
   ngOnInit(): void {
   }
+/*
+  goTosearchPatient(id: string ){
 
+    console.log('NOM SEARCH'+this.nom)
+      id=this.nom;
+    this.router.navigate(['/searchPatient', {recherche:id}]);
+  }*/
 }

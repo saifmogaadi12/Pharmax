@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ListPatientsComponent } from 'src/app/components/list-patients/list-patients.component';
+import { Router } from '@angular/router';
 import { BoardUserComponent } from './board-user.component';
 
 describe('BoardUserComponent', () => {

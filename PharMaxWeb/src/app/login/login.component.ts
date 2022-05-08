@@ -11,6 +11,9 @@ export class LoginComponent implements OnInit {
     username: null,
     password: null
   };
+
+  captcha!:string;
+
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
@@ -22,8 +25,14 @@ export class LoginComponent implements OnInit {
       this.roles = this.tokenStorage.getUser().roles;
     }
   }
+  resolved(captchaResponse: string){
+    this.captcha = captchaResponse;
+    console.log(this.captcha)
+ }
   onSubmit(): void {
     const { username, password } = this.form;
+    if(this.authService.testConn())
+      window.location.assign('/errorpage');
     this.authService.login(username, password).subscribe(
       data => {
         this.tokenStorage.saveToken(data.accessToken);
@@ -43,6 +52,6 @@ export class LoginComponent implements OnInit {
     window.location.assign('/user');
   }
   backError():void{
-    window.location.assign('/error-page');
+    window.location.assign('/errorpage');
   }
 }

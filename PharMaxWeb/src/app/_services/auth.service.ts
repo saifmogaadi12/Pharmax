@@ -18,6 +18,7 @@ export class AuthService {
     },
     (error)=>{
       console.error('error Caught in compo');
+      window.location.assign("errorpage");
     }
     ));
   }

@@ -29,8 +29,7 @@ export class RegisterComponent implements OnInit {
 
   resolved(captchaResponse: string){
      this.captcha = captchaResponse;
-     console.log(this.captcha);
-
+     console.log(this.captcha)
   }
   onSubmit(): void {
     const { username, email, password } = this.form;
