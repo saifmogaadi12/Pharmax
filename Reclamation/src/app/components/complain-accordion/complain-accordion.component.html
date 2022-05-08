@@ -1,0 +1,62 @@
+
+<div class="card h-100">
+  <div class="card-body">
+    <h4 class="card-title">Your claims</h4>
+    <hr>
+    <div class="accordion" id="accordion-claims">
+      <div class="accordion-item" *ngFor="let claim of claims | callback: filterStatusInProgress">
+        <h5 class="accordion-header">
+          <button class="accordion-button in-progress collapsed" type="button" data-bs-toggle="collapse" aria-expanded="false"
+                  id="{{'colapsOne'+claim.id}}" attr.data-bs-target="{{'#collapseOne'+claim.id}}"
+                  attr.aria-controls="{{'collapseOne'+claim.id}}">
+            <b>Subject: {{claim.subject}} - Status: In progress <span class="material-icons">pending_actions</span></b>
+          </button>
+          <a class="btn" (click)= "openDialogEdit(claim.id);"><i class="icon-edit"></i> Edit<span class="material-icons">edit</span></a>
+          <a class="btn" (click)= "Delete(claim.id);"><i class="icon-edit"></i> Delete<span class="material-icons">delete</span></a>
+        </h5>
+        <div class="accordion-collapse collapse" id="{{'collapseOne'+claim.id}}" aria-labelledby="headingOne"
+             data-bs-parent="#accordion-claims">
+          <div class="accordion-body">
+            {{claim.claimText}}
+            <div *ngIf="claim.responses"><hr><p><b>Responses:</b></p></div>
+            <div class="alert alert-secondary" *ngFor="let response of claim.responses"><p>{{response}}</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" *ngFor="let claim of claims | callback: filterStatusFinished">
+        <h2 class="accordion-header" id="headingTwo">
+          <button class="accordion-button finished collapsed" type="button" data-bs-toggle="collapse"
+                  aria-expanded="false" id="{{'collapsTwo'+claim.id}}" attr.data-bs-target="{{'#collapseTwo'+claim.id}}"
+                  attr.aria-controls="{{'collapseTwo'+claim.id}}">
+            <b>Subject: {{claim.subject}} - Status: Finished <span class="material-icons">done</span></b>
+          </button>
+        </h2>
+        <div id="{{'collapseTwo'+claim.id}}" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+             data-bs-parent="#accordion-claims">
+          <div class="accordion-body">
+            {{claim.claimText}}
+            <div *ngIf="claim.responses"><hr><p><b>Responses:</b></p></div>
+            <div class="alert alert-secondary" *ngFor="let response of claim.responses"><p>{{response}}</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" *ngFor="let claim of claims | callback: filterStatusError">
+        <h2 class="accordion-header" id="headingThree">
+          <button class="accordion-button with-error collapsed" type="button" data-bs-toggle="collapse"
+                  aria-expanded="false" id="{{'colapsThree'+claim.id}}"
+                  attr.data-bs-target="{{'#collapseThree'+claim.id}}" attr.aria-controls="{{'collapseThree'+claim.id}}">
+            <b>Subject: {{claim.subject}} - Status: Error <span class="material-icons">report_gmailerrorred</span></b>
+          </button>
+        </h2>
+        <div id="{{'collapseThree'+claim.id}}" class="accordion-collapse collapse" aria-labelledby="headingThree"
+             data-bs-parent="#accordion-claims">
+          <div class="accordion-body">
+            {{claim.claimText}}
+            <div *ngIf="claim.response"><hr><p><b>Responses:</b></p></div>
+            <div class="alert alert-secondary" *ngFor="let response of claim.response"><p>{{claim.response}}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

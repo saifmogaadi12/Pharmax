@@ -1,0 +1,41 @@
+<div class="row" id="reportcards">
+  <div class="col-lg-3">
+    <div class="card mb-3" style="margin-left:15%; margin-right:15%;">
+      <div class="card-header" id="header-totals">Totals</div>
+      <div class="card-body">
+        <h5 class="card-title">Summary of total claims</h5>
+        <p class="card-text">Amount: {{claims.length}} </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="card mb-3" style="margin-left:15%; margin-right:15%;">
+      <div class="card-header" id="header-progress">In Progress</div>
+      <div class="card-body">
+        <h5 class="card-title">Claim in progress</h5>
+        <p class="card-text">Amount: {{claimsProgress.length}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="card mb-3" style="margin-left:15%; margin-right:15%;">
+      <div class="card-header" id="finished-header">Finished</div>
+      <div class="card-body">
+        <h5 class="card-title">Claims completed</h5>
+        <p class="card-text">Amount: {{claimsFinished.length}} </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="card mb-3" style="margin-left:15%; margin-right:15%;">
+      <div class="card-header" id="header-error">Error</div>
+      <div class="card-body">
+        <h5 class="card-title">Delayed Claims</h5>
+        <p class="card-text">Amount: {{claimsError.length}} </p>
+      </div>
+    </div>
+  </div>
+</div>

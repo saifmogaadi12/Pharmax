@@ -1,0 +1,80 @@
+<div class="row" id="search-t">
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand">View claims</a>
+    <form class="form-inline">
+      <div class="row">
+        <div class="col-4">
+          <div class="dropdown">
+            <select class="form-select" aria-label="Default select example" (change)="selectOption($event)"
+                    [(ngModel)]="selected">
+              <option selected>Filters</option>
+              <option value="1">Claim Name</option>
+              <option value="2">User RUT</option>
+              <option value="3">Claim status</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-4">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" (keyup)="onKey($event,ring)">
+        </div>
+        <div class="col-4">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="load()" >Search</button>
+        </div>
+      </div>
+    </form>
+  </nav>
+</div>
+
+<div id='htmlData'>
+  <table class="table table-bordered table-striped table-responsive-xl">
+      <tr>
+        <th class="col-lg-1" scope="col-lg-1">Claim ID</th>
+        <th class="col-lg-1" scope="col-lg-1">RUT</th>
+        <th class="col-lg-2" scope="col-lg-3">Name</th>
+        <th class="col-lg-2" scope="col-lg-1">Subject</th>
+        <th class="col-lg-3" scope="col-lg-2">Content</th>
+        <th class="col-lg-1" scope="col-lg-3">Date</th>
+        <th class="col-lg-1" scope="col-lg-1">Status</th>
+        <th class="col-lg-2" scope="col-lg-2">PDF document</th>
+      </tr>
+      <tbody>
+      <tr *ngFor="let claim of claims">
+        <th scope="row">{{claim.id}}</th>
+        <td>{{claim.route}}</td>
+        <td>{{claim.name}} {{claim.surname}}</td>
+        <td>{{claim.subject}}</td>
+        <td><p>{{claim.claimText}}</p>
+          <div *ngIf="claim.responses"><hr><p><b>Responses:</b></p></div>
+          <div class="alert alert-secondary" *ngFor="let response of claim.responses"><p>{{response}}</p></div>
+          <div class="set-claim">
+            <app-table-answer-modal (click)="setClaim(claim.id)" [claims]="claims"></app-table-answer-modal>
+          </div></td>
+        <td>{{claim.date}}</td>
+        <td>
+          <p id="label_{{claim.id}}">{{claim.status}}</p>
+          <select name="status" class="form-control new-state" [(ngModel)]="status" id="text_{{claim.id}}"
+                  style="display: none;">
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+            <option value="Error">Error</option>
+          </select>
+          <button id="display_{{claim.id}}" type="button" class="btn button-edit-1"
+                  (click)="showEdition(claim)" style="display: inline;"><span class="iconify edit-icon" data-icon="mdi:square-edit-outline" data-inline="false"> </span> Edit</button>
+          <button id="change_{{claim.id}}" type="button" class="btn button-edit"
+                  (click)="sendStatus(claim,claim.id)" style="display: none;"><span class="iconify edit-icon" data-icon="mdi:content-save" data-inline="false"></ span></button>
+          <button id="cancel_{{claim.id}}" type="button" class="btn cancel-button"
+                  (click)="cancelEdition(claim)" style="display: none;"><span class="iconify edit-icon" data-icon="mdi:close" data-inline="false"></span> </button>
+        </td>
+        <td>
+          <div class="row">
+            <div class="col pdf">
+              <p><button class="btn" (click)="downloadPDF(claim)"><span class="iconify" data-icon="mdi:file-download-outline" data-inline="false"></span></button>
+                <button type="button" class="btn" (click)="showPDF(claim)"><span class="iconify" data-icon="mdi:file-pdf-outline" data-inline="false" ></span></button></p>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+

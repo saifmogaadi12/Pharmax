@@ -1,0 +1,17 @@
+.navbar{
+    background:  #010488;
+  }
+
+  .nav-link{
+    color: white;
+  }
+
+  .navbar-brand{
+    color: #3C3C3B;
+  }
+
+
+.material-icons{
+  margin-right:45px;
+  vertical-align: top;
+}

@@ -1,0 +1,72 @@
+<app-navbar-user></app-navbar-user>
+<div class="container">
+  <div class="row p-3">
+    <div class="col-6 card-user">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">My Data</h5>
+          <hr>
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input id="input-names" class="form-control" value={{user.name}} disabled="true"
+                   [(ngModel)]="name" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Last name</label>
+            <input id="input-surnames" class="form-control" value={{user.surnames}} disabled="true"
+                   [(ngModel)]="surnames" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Route</label>
+            <input id="input-route" class="form-control" disabled="true" value={{user.route}}
+                   [(ngModel)]="route" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">e-mail</label>
+            <input id="input-email" class="form-control" disabled="true" value={{user.email}}
+                   [(ngModel)]="email" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Phone number</label>
+            <input id="input-phone" class="form-control" disabled="true"
+                   value={{user.phone_number}} [(ngModel)]="phone_number" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" id="input-passwordt" style="display: none;">Password</label>
+            <input id="input-password" class="form-control" value={{user.password}}
+                   [(ngModel)]="password" required style="display: none;" type="password">
+          </div>
+          <hr>
+          <button type="submit" style="display:inline;" id="edit" class="btn btn-primary button"
+                  (click)="editData()">Edit Data</button>
+          <button type="submit" style="display:none;" id="send" class="btn btn-primary"
+                  (click)="validateUserFields()">Send Data</button>
+          <button type="submit" style="display:none;margin-left:5px;" id="cancel" class="btn btn-warning"
+                  (click)="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 card-user">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">New Claim</h5>
+          <hr>
+          <div class="mb-3">
+            <label class="form-label">Subject:</label>
+            <input class="form-control" [(ngModel)]="ClaimSubject">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea [(ngModel)]="claimText" class="form-control" rows="12" cols="50"></textarea>
+          </div>
+          <hr>
+          <button type="submit" class="btn btn-primary button" (click)="addClaim()">Submit Claim</button>
+        </div>
+      </div>
+    </div>
+    <div class="row p-3">
+      <div class="col">
+        <app-complain-accordion [claims]="claims"></app-complain-accordion>
+      </div>
+    </div>
+  </div>

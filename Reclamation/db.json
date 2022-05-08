@@ -1,0 +1,50 @@
+{
+  "admins": [
+    {
+      "email": "admin@admin.com",
+      "password": "admin"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "ok",
+      "surnames": "ok",
+      "route": "19581239",
+      "email": "ok@ok.ok",
+      "phone_number": 0,
+      "password": "ok"
+    },
+    {
+      "name": "ok2",
+      "surnames": "ok2",
+      "route": "12121212",
+      "email": "ok2@ok.ok",
+      "phone_number": "42545454",
+      "password": "OK",
+      "id": 2
+    },
+    {
+      "name": "123",
+      "surnames": "123",
+      "route": "123",
+      "email": "123",
+      "phone_number": "123",
+      "password": "123",
+      "id": 3
+    }
+  ],
+  "claims": [
+    {
+      "route": "19581239",
+      "name": "ok",
+      "surname": "ok",
+      "subject": "test1",
+      "claimText": "testing",
+      "date": "28/4/2022",
+      "status": "In Progress",
+      "responses": [],
+      "id": 1
+    }
+  ]
+}

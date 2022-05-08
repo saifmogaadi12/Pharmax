@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+#logo-umayor{
+    margin-left: 50px;
+}
+
+.material-icons{
+    vertical-align:middle;
+}
+
+.iconify{
+    vertical-align: middle;
+}
+
+
+.row{
+    --bs-gutter-x: 0 !important;
+  }

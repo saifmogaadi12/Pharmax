@@ -1,0 +1,49 @@
+thead{
+  background-color: #010488;
+}
+
+.table{
+  margin-left: 40px;
+  width: 95%;
+}
+
+#search-t{
+  width: 95%;
+  margin-left:40px;
+  margin-top:20px;
+  background-color: rgb(247, 247, 247);
+}
+
+.btn-sm{
+  margin-bottom: 3px;
+  background-color: #dadada;
+  color: #000000;
+
+}
+
+.iconify{
+  font-size: 30px;
+}
+
+.edit-icon {
+  font-size: 20px !important;
+}
+
+.pdf{
+  text-align: center;
+  vertical-align: middle;
+}
+
+.button-edit{
+  float:left;
+
+}
+
+.cancel-button{
+  float:right;
+}
+
+.button-edit-1{
+  border-color: #3c3c3b;
+  border-width: 1px;
+}

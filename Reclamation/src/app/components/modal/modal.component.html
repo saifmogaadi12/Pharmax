@@ -1,0 +1,24 @@
+<button type="button" id="homebutton" data-bs-toggle="modal" data-bs-target="#password-recovery">Recover your password
+</button>
+
+<div class="modal fade" id="password-recovery" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Retrieve your password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Enter your email:</p>
+        <span class="material-icons">
+          mail_outline
+          </span> <input type="text" class="input-mail" placeholder="firstname.lastname@mayor.cl">
+        <p>We will send a new password to your email.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+        <button type="button" class="btn btn-primary" id="submitbutton" data-bs-dismiss="modal" (click)="passwordRecovery()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
