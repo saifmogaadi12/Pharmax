@@ -12,6 +12,10 @@ import { AuthenticatorGuard } from './guard/authenticator.guard'
 import { AdminAuthGuard } from './guard/admin-auth.guard'
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import { HttpClientModule } from "@angular/common/http";
+import {RendezVousListComponent} from "./components/rendez-vous-list/rendez-vous-list.component";
+import {RendezVousDetailsComponent} from "./components/rendez-vous-details/rendez-vous-details.component";
+import {AddRendezVousComponent} from "./components/add-rendez-vous/add-rendez-vous.component";
+import {CalendarComponent} from "./components/calendar/calendar.component";
 
 
 const routes: Routes = [
@@ -22,7 +26,14 @@ const routes: Routes = [
   { path: 'report', component: ComplainreportAdminComponent, canActivate: [AdminAuthGuard] },
   { path: 'user-login', component: LoginUserComponent },
   { path: 'user-register', component: RegisterUserComponent },
-  { path: 'user-home', component: HomeUserComponent, canActivate: [AuthenticatorGuard] }
+  { path: 'user-home', component: HomeUserComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'user-home/rendezvous', component: RendezVousListComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'rendezvous/:id', component: RendezVousDetailsComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'user-home/add', component: AddRendezVousComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'user-home/rendezvous/add', component: AddRendezVousComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'user-home/add/rendezvous', component: RendezVousListComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'user-home/rendezvous/add/rendezvous', component: RendezVousListComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'user-home/add/rendezvous/add', component: AddRendezVousComponent, canActivate: [AuthenticatorGuard] },
 ];
 
 export function tokenGetter() {

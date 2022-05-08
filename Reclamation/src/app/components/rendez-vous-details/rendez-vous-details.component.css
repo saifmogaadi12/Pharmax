@@ -1,0 +1,13 @@
+.edit-form {
+  max-width: 400px;
+  margin: auto;
+}
+
+.black-txt{
+  color:black;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  padding-top: 5em;
+}

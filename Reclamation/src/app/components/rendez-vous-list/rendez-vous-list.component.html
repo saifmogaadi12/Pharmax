@@ -1,0 +1,65 @@
+<app-navbar-user></app-navbar-user>
+<app-calendar></app-calendar>
+<div class="list row center" >
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchTitle()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Rendez Vous List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let rdv of rendezvous; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveRendezVous(rdv, i)"
+      >
+        {{ rdv.title }}
+      </li>
+    </ul>
+
+    <button class="m-3 btn btn-sm btn-danger" (click)="removeAllRendezVous()">
+      Remove All
+    </button>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentRendezVous.id">
+      <h4>Rendez Vous</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentRendezVous.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentRendezVous.description }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentRendezVous.published ? "Published" : "Pending" }}
+      </div>
+
+      <a class="badge-warning" routerLink="/rendezvous/{{ currentRendezVous.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentRendezVous">
+      <br />
+      <p>Please click on a Rendez Vous...</p>
+    </div>
+  </div>
+</div>

@@ -2,20 +2,15 @@ const db = require("../models");
 const RendezVous = db.rendezvous;
 
 exports.create = (req, res) => {
-  if (!req.body.name) {
+  if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
     const rendezvous = new RendezVous({
-      route: req.body.route,
-      name: req.body.name,
-      surname: req.body.surname,
-      subject: req.body.subject,
-      claimText: req.body.claimText,
-      date: req.body.date,
-      status: req.body.status,
-      responses: req.body.responses
+    title: req.body.title,
+    description: req.body.description,
+    published: req.body.published ? req.body.published : false
   });
 
     rendezvous
@@ -32,8 +27,8 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  const title = req.query.name;
-  var condition = title ? { title: { $regex: new RegExp(name), $options: "i" } } : {};
+  const title = req.query.title;
+  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
 
   RendezVous.find(condition)
     .then(data => {
@@ -60,56 +55,6 @@ exports.findOne = (req, res) => {
       res
         .status(500)
         .send({ message: "Error retrieving Rendez Vous with id=" + id });
-    });
-};
-
-exports.findSubject = (req, res) => {
-  const name = req.params.name;
-  console.log(name);
-
-  RendezVous.find({subject:  { $regex: new RegExp(name), $options: "i" }})
-    .then(data => {
-      if (!data)
-        res.status(404).send({ message: "Not found  " + name });
-      else res.send(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving " + name });
-    });
-};
-
-exports.findRut = (req, res) => {
-  const name = req.params.route;
-  console.log(name);
-
-  RendezVous.find({route:  { $regex: new RegExp(name), $options: "i" }})
-    .then(data => {
-      if (!data)
-        res.status(404).send({ message: "Not found  " + name });
-      else res.send(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving " + name });
-    });
-};
-exports.findStatus = (req, res) => {
-  const name = req.params.status;
-  console.log(name);
-
-  RendezVous.find({status:  { $regex: new RegExp(name), $options: "i" }})
-    .then(data => {
-      if (!data)
-        res.status(404).send({ message: "Not found  " + name });
-      else res.send(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving " + name });
     });
 };
 

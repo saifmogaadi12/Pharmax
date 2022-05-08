@@ -1,0 +1,9 @@
+.submit-form {
+  max-width: 400px;
+  margin: auto;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  padding-top: 20em;
+}

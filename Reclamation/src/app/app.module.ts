@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +32,23 @@ import {ConfirmDialogComponent} from './components/shared/confirm-dialog/confirm
 import {MatCardModule} from '@angular/material/card';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {DatePipe} from "@angular/common";
+import {APP_BASE_HREF, DatePipe, HashLocationStrategy, LocationStrategy} from "@angular/common";
+import {AddRendezVousComponent} from "./components/add-rendez-vous/add-rendez-vous.component";
+import {RendezVousDetailsComponent} from "./components/rendez-vous-details/rendez-vous-details.component";
+import {CalendarComponent} from "./components/calendar/calendar.component";
+import {RendezVousListComponent} from "./components/rendez-vous-list/rendez-vous-list.component";
+import {ScheduleModule} from "@syncfusion/ej2-angular-schedule";
+import {ComboBoxModule, DropDownListModule, MultiSelectModule} from "@syncfusion/ej2-angular-dropdowns";
+import {ButtonModule, CheckBoxModule, RadioButtonModule, SwitchModule} from "@syncfusion/ej2-angular-buttons";
+import {SplitButtonModule} from "@syncfusion/ej2-angular-splitbuttons";
+import {SidebarModule, TreeViewModule} from "@syncfusion/ej2-angular-navigations";
+import {DatePickerModule, TimePickerModule} from "@syncfusion/ej2-angular-calendars";
+import {MaskedTextBoxModule, TextBoxModule} from "@syncfusion/ej2-angular-inputs";
+import {ListViewModule} from "@syncfusion/ej2-angular-lists";
+import {ChartModule} from "@syncfusion/ej2-angular-charts";
+import {GridModule} from "@syncfusion/ej2-angular-grids";
+import {DialogModule} from "@syncfusion/ej2-angular-popups";
+import {ToastModule} from "@syncfusion/ej2-angular-notifications";
 
 @NgModule({
   declarations: [
@@ -59,7 +75,11 @@ import {DatePipe} from "@angular/common";
     ComplainCardsComponent,
     TableAnswerModalComponent,
     EditUserComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    AddRendezVousComponent,
+    RendezVousDetailsComponent,
+    RendezVousListComponent,
+    CalendarComponent
   ],
   entryComponents: [ConfirmDialogComponent],
   imports: [
@@ -71,9 +91,35 @@ import {DatePipe} from "@angular/common";
     ChartsModule,
     NgbModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserModule,
+    ScheduleModule,
+    DropDownListModule,
+    MultiSelectModule,
+    ComboBoxModule,
+    CheckBoxModule,
+    ButtonModule,
+    SwitchModule,
+    SplitButtonModule,
+    RadioButtonModule,
+    TreeViewModule,
+    DatePickerModule,
+    TimePickerModule,
+    TextBoxModule,
+    MaskedTextBoxModule,
+    ListViewModule,
+    SidebarModule,
+    ChartModule,
+    GridModule,
+    DialogModule,
+    ToastModule
   ],
-  providers: [ComplainAccordionComponent, HomeUserComponent , DatePipe],
-  bootstrap: [AppComponent]
+  providers: [ComplainAccordionComponent, HomeUserComponent , DatePipe,CalendarComponent,ComplainreportAdminComponent,{ provide: APP_BASE_HREF, useValue: '/' }, Location,
+    { provide: LocationStrategy, useClass: HashLocationStrategy }],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

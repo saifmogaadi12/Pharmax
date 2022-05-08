@@ -1,4 +1,3 @@
-const rendezvous = require("../controllers/rendez-vous.controller.js");
 module.exports = app => {
   const rendezvous = require("../controllers/rendez-vous.controller.js");
 
@@ -6,14 +5,7 @@ module.exports = app => {
 
   router.post("/", rendezvous.create);
 
-  router.get("/find/:name", rendezvous.findSubject);
-
-  router.get("/find2/:route", rendezvous.findRut);
-
-  router.get("/find3/:status", rendezvous.findStatus);
-
   router.get("/", rendezvous.findAll);
-
 
   router.get("/published", rendezvous.findAllPublished);
 

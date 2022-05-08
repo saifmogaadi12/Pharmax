@@ -1,0 +1,67 @@
+<app-navbar-user></app-navbar-user>
+<app-calendar></app-calendar>
+<div class="center">
+  <div *ngIf="currentRendezVous.id" class="edit-form">
+    <h4>Rendez Vous</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentRendezVous.title"
+          name="title"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentRendezVous.description"
+          name="description"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentRendezVous.published ? "Published" : "Pending" }}
+      </div>
+    </form>
+
+    <button
+      class="badge badge-dark mr-2 black-txt"
+      *ngIf="currentRendezVous.published"
+      (click)="updatePublished(false)"
+    >
+      Urgent
+    </button>
+    <button
+      *ngIf="!currentRendezVous.published"
+      class="badge e-badge-dark mr-2 black-txt"
+      (click)="updatePublished(true)"
+    >
+      Not Urgent
+    </button>
+
+    <button class="badge badge-danger mr-2 black-txt" (click)="deleteRendezVous()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2 black-txt"
+      (click)="updateRendezVous()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentRendezVous.id">
+    <br />
+    <p>Cannot access this Rendez Vous...</p>
+  </div>
+</div>

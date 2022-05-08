@@ -11,6 +11,8 @@ RUN THIS 4 SERVERS CONCURRENTLY
 
 3) cd backend 
 
+   cd node-express-mongodb
+
    nodemon server.js
 
 

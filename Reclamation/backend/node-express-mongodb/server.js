@@ -85,11 +85,8 @@ app.get("/", (req, res) => {
     res.json({ message: "Welcome to my application." });
 });
 
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to my application." });
-});
 
+require("./app/routes/reclamation.routes")(app);
 
 require("./app/routes/rendez-vous.routes")(app);
 

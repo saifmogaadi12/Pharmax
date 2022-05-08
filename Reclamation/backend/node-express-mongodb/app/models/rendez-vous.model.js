@@ -1,16 +1,9 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-        route: String,
-        name: String,
-        surname: String,
-        subject: String,
-        claimText: String,
-        date: String,
-        status: String,
-        responses: [{
-          type: String
-        }]
+      title: String,
+      description: String,
+      published: Boolean
     },
     { timestamps: true }
   );

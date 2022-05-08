@@ -9,7 +9,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 })
 export class ClaimService {
 
-  private baseUrl = 'http://localhost:5000/api/rendezvous';
+  private baseUrl = 'http://localhost:5000/api/reclamation';
 
   private claimsAc: BehaviorSubject<Claim[]> = new BehaviorSubject<Claim[]>([]);
   constructor(private http: HttpClient) { }
