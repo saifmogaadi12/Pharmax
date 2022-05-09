@@ -1,0 +1,32 @@
+/*verde para finalizado, azul para pendiente, rojo error*/
+#colapsOne{
+  background-color: #d8dfff;
+}
+
+#colapsTwo{
+  background-color: #e1ffdc;
+}
+
+#colapsThree{
+  background-color: #ffdcdc;
+}
+
+.card-user{
+  padding:10px;
+}
+
+.card-body{
+  height: 650px;
+}
+
+.button{
+  margin:10px;
+  bottom:0px;
+  right:0px;
+  position:absolute;
+}
+
+.landing{
+  background-color: #010488;
+  color : white;
+}

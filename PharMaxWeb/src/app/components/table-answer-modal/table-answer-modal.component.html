@@ -1,0 +1,25 @@
+<div class="answer-button">
+  <button type="button" class="btn button" id="homebutton" data-bs-toggle="modal" data-bs-target="#complain-answer">
+    <span class="iconify" data-icon="mdi:message-reply-text-outline" data-inline="false"></span> Add Reply
+  </button>
+</div>
+
+<div class="modal fade" id="complain-answer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add new response to claim</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Enter answer:</p>
+        <textarea class="form-control" id="answer-textarea" rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+        <tr *ngFor="let claim of claims">
+        <button type="button" class="btn btn-primary" id="submitbutton" data-bs-dismiss="modal" (click)="submitButton(claim.id)" >Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

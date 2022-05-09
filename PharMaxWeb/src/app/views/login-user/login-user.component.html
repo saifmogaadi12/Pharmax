@@ -1,0 +1,15 @@
+<app-navbar-user></app-navbar-user>
+<div class="wrapper">
+  <div id="formContent">
+    <form>
+      <h2> User login</h2>
+      <input type="text" [(ngModel)]="email" placeholder="firstname.lastname@email.com" name="login">
+      <input type="password" [(ngModel)]="password" placeholder="Password" name="login">
+      <input type="submit" value="Enter" (click)="login()">
+    </form>
+    <div id="formFooter">
+      <app-modal></app-modal>
+      <input type="submit" value="Register" routerLink="/user-register">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<app-navbar-admin></app-navbar-admin>
+<div class="wrapper">
+  <div id="formContent">
+    <form>
+      <h2> Administrator Login</h2>
+      <input type="text" [(ngModel)]="email" placeholder="firstname.lastname@umayor.cl" name="login">
+      <input type="password" [(ngModel)]="password" placeholder="Password" name="login">
+      <input type="submit" value="Enter" (click)="login()">
+    </form>
+    <div id="formFooter">
+      <app-modal></app-modal>
+    </div>
+  </div>
+</div>
