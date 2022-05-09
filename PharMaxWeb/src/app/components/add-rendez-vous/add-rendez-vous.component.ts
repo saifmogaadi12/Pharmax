@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RendezVous } from 'src/app/models/rendez-vous.model';
 import { RendezVousService } from 'src/app/services/rendez-vous.service';
+import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
   selector: 'app-add-rendez-vous',
@@ -9,6 +10,12 @@ import { RendezVousService } from 'src/app/services/rendez-vous.service';
 })
 export class AddRendezVousComponent implements OnInit {
 
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+
   rendezvous: RendezVous = {
     title: '',
     description: '',
@@ -16,9 +23,19 @@ export class AddRendezVousComponent implements OnInit {
   };
   submitted = false;
 
-  constructor(private rendezvousService: RendezVousService) { }
+  constructor(private rendezvousService: RendezVousService,private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+    }
+      else 
+        window.location.assign("errorpage");
   }
 
   saveRendezVous(): void {

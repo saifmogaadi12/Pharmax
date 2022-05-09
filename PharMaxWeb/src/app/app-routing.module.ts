@@ -31,6 +31,7 @@ import {RendezVousDetailsComponent} from "./components/rendez-vous-details/rende
 import {AddRendezVousComponent} from "./components/add-rendez-vous/add-rendez-vous.component";
 import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
 import {HttpClientModule} from "@angular/common/http";
+import { ComplainAccordionComponent } from './components/complain-accordion/complain-accordion.component';
 
 const routes: Routes = [
   { path: 'addPatient', component: AddPatientComponent },
@@ -54,19 +55,20 @@ const routes: Routes = [
 
   { path: '', component: LandingUserComponent },
   { path: 'admin-login', component: LoginAdminComponent },
-  { path: 'admin', component: LandingAdminComponent, canActivate: [AdminAuthGuard] },
-  { path: 'list', component: ComplainlistAdminComponent, canActivate: [AdminAuthGuard] },
-  { path: 'report', component: ComplainreportAdminComponent, canActivate: [AdminAuthGuard] },
+  { path: 'admin', component: LandingAdminComponent },
+  { path: 'list', component: ComplainlistAdminComponent },
+  { path: 'claim', component: HomeUserComponent },
+  { path: 'report', component: ComplainreportAdminComponent },
   { path: 'user-login', component: LoginUserComponent },
   { path: 'user-register', component: RegisterUserComponent },
-  { path: 'user-home', component: HomeUserComponent, canActivate: [AuthenticatorGuard] },
-  { path: 'user-home/rendezvous', component: RendezVousListComponent, canActivate: [AuthenticatorGuard] },
-  { path: 'rendezvous/:id', component: RendezVousDetailsComponent, canActivate: [AuthenticatorGuard] },
-  { path: 'user-home/add', component: AddRendezVousComponent, canActivate: [AuthenticatorGuard] },
-  { path: 'user-home/rendezvous/add', component: AddRendezVousComponent, canActivate: [AuthenticatorGuard] },
-  { path: 'user-home/add/rendezvous', component: RendezVousListComponent, canActivate: [AuthenticatorGuard] },
-  { path: 'user-home/rendezvous/add/rendezvous', component: RendezVousListComponent, canActivate: [AuthenticatorGuard] },
-  { path: 'user-home/add/rendezvous/add', component: AddRendezVousComponent, canActivate: [AuthenticatorGuard] },
+  { path: 'user-home', component: HomeUserComponent },
+  { path: 'rendezvous', component: RendezVousListComponent },
+  { path: 'rendezvous/:id', component: RendezVousDetailsComponent },
+  { path: 'add', component: AddRendezVousComponent },
+  { path: 'rendezvous/add', component: AddRendezVousComponent },
+  { path: 'add/rendezvous', component: RendezVousListComponent },
+  { path: 'rendezvous/add/rendezvous', component: RendezVousListComponent },
+  { path: 'add/rendezvous/add', component: AddRendezVousComponent },
 
 
 

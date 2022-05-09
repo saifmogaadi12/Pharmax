@@ -1,4 +1,117 @@
 <div id="app">
-  <app-navbar></app-navbar>
+
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center ">
+    <div class="container d-flex align-items-center justify-content-between">
+      <div class="logo">
+        <h1><a href="home"><span>PharMax</span></a></h1>
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+ 
+
+           <li class="nav-item">
+              <a href="/home" class="nav-link" routerLink="home">Home </a>
+              
+            </li>
+
+            <li class="nav-item" *ngIf="showAdminBoard">
+              <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+            </li>
+
+            <li class="nav-item" *ngIf="showAdminBoard">
+              <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
+            </li>
+         
+            <li class="nav-item" *ngIf="showModeratorBoard">
+              <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
+            </li>
+            <li>
+              <div class="dropdown">
+                <a class="dropbtn">Doctor Area</a>
+                <div class="dropdown-content">
+                  <a routerLink="listPatient"class="nav-link">Patients</a>
+                  <a routerLink="addPatient"class="nav-link">Add</a>
+                  <a routerLink="#" class="nav-link">Instructors</a>
+                </div>
+              </div>
+            </li>
+            <li>
+            <div class="dropdown" *ngIf="isLoggedIn">
+              <a class="dropbtn">Rendez Vous</a>
+              <div class="dropdown-content">
+                <a routerLink="rendezvous" class="nav-link">Rendez Vous List</a>
+                <a routerLink="add" class="nav-link">ADD Rendez Vous</a>
+                <a routerLink="claim" class="nav-link">ADD Claim</a>
+                <a routerLink="home" class="nav-link">Deconnect</a>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="/profile" class="nav-link" *ngIf="isLoggedIn" routerLink="profile">{{ username }}</a>
+          </li>
+          <li class="nav-item">
+            <a href class="nav-link" *ngIf="isLoggedIn" (click)="logout()">LogOut</a>
+          </li>
+          <li *ngIf="!isLoggedIn" class="nav-item">
+            <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
+          </li>
+          <li *ngIf="!isLoggedIn" class="nav-item">
+            <a href="/login" class="nav-link" routerLink="login">Login</a>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+
+    <style>
+      /* Dropdown Button */
+.dropbtn {
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* The container <div> - needed to position the dropdown content */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+    </style>
+  </header><!-- End Header -->
+
+
+
     <router-outlet></router-outlet>
 </div>

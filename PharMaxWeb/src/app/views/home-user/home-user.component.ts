@@ -14,10 +14,10 @@ import { DatePipe } from '@angular/common';
 })
 export class HomeUserComponent implements OnInit {
 
-  name = '';
-  surnames = '';
-  route = '';
-  email = '';
+  name = 'test';
+  surnames = 'test';
+  route = 'test';
+  email = 'test';
   // tslint:disable-next-line:variable-name
   phone_number = 0;
   password = '';
@@ -28,12 +28,12 @@ export class HomeUserComponent implements OnInit {
 
   user: Users = {
     id: 0,
-    name: '',
-    surnames: '',
-    route: '',
-    email: '',
+    name: 'test',
+    surnames: 'test',
+    route: 'test',
+    email: 'test',
     phone_number: 0,
-    password: ''
+    password: 'test'
   };
 
   // Fields to be able to add a new claim
@@ -80,12 +80,12 @@ export class HomeUserComponent implements OnInit {
   // tslint:disable-next-line:typedef
   addClaim() {
     const newClaim: Claim = {
-      route: this.routeUserClaim,
-      name: this.ClaimUserName,
-      surname: this.surnameUserClaim,
+      route: '1245784',
+      name: 'test',
+      surname: 'testing',
       subject: this.ClaimSubject,
       claimText: this.claimText,
-      date: this.stringDate,
+      date: "06/09/2022",
       status: 'In Progress',
       responses: ['En Cours...'],
     };
