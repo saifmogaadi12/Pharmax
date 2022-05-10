@@ -16,6 +16,8 @@ import { UpdatePatientComponent } from './components/update-patient/update-patie
 import { MaillerPatientComponent } from './components/mailer-patient/mailer-patient.component';
 import { DetailsPatientComponent } from './components/details-patient/details-patient.component';
 import { SearchPatientComponent } from './components/search-patient/search-patient.component';
+import { ListMedecinComponent } from './components/list-medecin/list-medecin.component';
+import { CertifComponent } from './components/certif/certif.component';
 
 const routes: Routes = [
   { path: 'addPatient', component: AddPatientComponent },
@@ -26,7 +28,11 @@ const routes: Routes = [
   { path: 'maillerPatient', component: MaillerPatientComponent },
   { path: 'detailsPatient', component: DetailsPatientComponent },
   { path: 'searchPatient', component: SearchPatientComponent },
-  
+
+  // oumayma routes (doctors + Certif)
+  { path: 'doctor', component: ListMedecinComponent },
+  { path: 'certif', component: CertifComponent },
+
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -35,10 +41,10 @@ const routes: Routes = [
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
   { path: 'errorpage', component: ErrorpageComponent },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' }
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
