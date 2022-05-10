@@ -1,0 +1,258 @@
+<section class="h-100 h-custom gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        Liste Des Medecins
+        <input nz-input (keyup)="searchAll($event)" />
+        <button
+          *ngIf="userRole === 'admin'"
+          (click)="openModalAdd()"
+          nz-button
+          nzType="primary"
+        >
+          Ajouter
+        </button>
+        <div
+          class="card card-registration card-registration-2"
+          style="border-radius: 15px"
+        >
+          <div class="card-body g-0">
+            <div class="table-operations"></div>
+            <nz-table
+              #filterTable
+              [nzData]="listOfDisplayData"
+              nzTableLayout="fixed"
+            >
+              <thead>
+                <tr>
+                  <th
+                    nzCustomFilter
+                    *ngFor="let column of listOfColumns; trackBy: trackByName"
+                    [(nzSortOrder)]="column.sortOrder"
+                    [nzSortFn]="column.sortFn"
+                    [nzFilterFn]="column.filterFn"
+                  >
+                    {{ column.name }}
+                    <nz-filter-trigger
+                      *ngIf="column.name === 'nom'"
+                      [(nzVisible)]="visible"
+                      [nzActive]="searchValue.length > 0"
+                      [nzDropdownMenu]="menu"
+                    >
+                      <i nz-icon nzType="search"></i>
+                    </nz-filter-trigger>
+                  </th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of filterTable.data">
+                  <td><nz-avatar nzIcon="user"></nz-avatar> {{ data.nom }}</td>
+                  <td>{{ data.prenom }}</td>
+                  <td>{{ data.specialite }}</td>
+                  <td>{{ data.adresse }}</td>
+                  <td>{{ data.phone }}</td>
+                  <td *ngIf="userRole === 'admin'">
+                    <button
+                      nz-button
+                      nzType="primary"
+                      (click)="openModalUpdate(data)"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      nz-button
+                      (click)="deleteDoctor(data._id)"
+                      nzType="default"
+                    >
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search name"
+        [(ngModel)]="searchValue"
+      />
+      <button
+        nz-button
+        nzSize="small"
+        nzType="primary"
+        (click)="search()"
+        class="search-button"
+      >
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+<nz-modal
+  [nzWidth]="'80%'"
+  [(nzVisible)]="isVisible"
+  nzTitle="The first Modal"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="update"
+>
+</nz-modal>
+<ng-template #add>
+  <form [formGroup]="validateForm" nz-form [nzLayout]="'vertical'">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="nom">Nom</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input name="nom" type="nom" formControlName="nom" id="nom" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="prenom">prenom</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="prenom"
+          type="prenom"
+          formControlName="prenom"
+          id="prenom"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="adresse">adresse</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="adresse"
+          type="adresse"
+          formControlName="adresse"
+          id="adresse"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="email">email</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="email"
+          type="email"
+          formControlName="email"
+          id="email"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="specialite">specialite</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="specialite"
+          type="specialite"
+          formControlName="specialite"
+          id="specialite"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="phone">phone</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="phone"
+          type="phone"
+          formControlName="phone"
+          id="phone"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<ng-template #update>
+  <form [formGroup]="validateForm" nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="nom">Nom</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input nz-input name="nom" type="nom" formControlName="nom" id="nom" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="prenom">prenom</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="prenom"
+          type="prenom"
+          formControlName="prenom"
+          id="prenom"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="adresse">adresse</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="adresse"
+          type="adresse"
+          formControlName="adresse"
+          id="adresse"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="email">email</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="email"
+          type="email"
+          formControlName="email"
+          id="email"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="specialite">specialite</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="specialite"
+          type="specialite"
+          formControlName="specialite"
+          id="specialite"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="phone">phone</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="phone"
+          type="phone"
+          formControlName="phone"
+          id="phone"
+        />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<nz-modal
+  [(nzVisible)]="isVisibleUpdate"
+  nzTitle="The second Modal"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="add"
+>
+</nz-modal>

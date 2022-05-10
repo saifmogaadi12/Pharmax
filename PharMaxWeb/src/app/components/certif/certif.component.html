@@ -1,0 +1,321 @@
+<section class="h-100 h-custom gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12">
+        Liste Des Certificats
+
+        <input
+          nz-input
+          placeholder="Rechercher..."
+          (keyup)="searchAll($event)"
+        />
+        <button
+          *ngIf="userRole === 'admin'"
+          (click)="openModalAdd()"
+          nz-button
+          nzType="primary"
+        >
+          Ajouter
+        </button>
+        <div
+          class="card card-registration card-registration-2"
+          style="border-radius: 15px"
+        >
+          <div class="card-body g-0">
+            <div class="table-operations row">
+              <ngx-charts-bar-vertical
+                [results]="stats"
+                (select)="onSelect($event)"
+              >
+              </ngx-charts-bar-vertical>
+            </div>
+            <nz-table
+              #filterTable
+              #nestedTable
+              [nzData]="listOfDisplayData"
+              nzTableLayout="fixed"
+            >
+              <thead>
+                <tr>
+                  <th
+                    nzCustomFilter
+                    *ngFor="let column of listOfColumns; trackBy: trackByName"
+                    [(nzSortOrder)]="column.sortOrder"
+                    [nzSortFn]="column.sortFn"
+                    [nzFilterFn]="column.filterFn"
+                  >
+                    {{ column.name }}
+                    <nz-filter-trigger
+                      *ngIf="column.name === 'docteur'"
+                      [(nzVisible)]="visible"
+                      [nzActive]="searchValue.length > 0"
+                      [nzDropdownMenu]="menu"
+                    >
+                      <i nz-icon nzType="search"></i>
+                    </nz-filter-trigger>
+                  </th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of filterTable.data">
+                  <td>
+                    <nz-avatar nzIcon="user"></nz-avatar> {{ data.docteur }}
+                  </td>
+                  <td>{{ data.dateconsultation }}</td>
+                  <td>{{ data.createdAt.split("T")[0] }}</td>
+                  <td>{{ data.updatedAt.split("T")[0] }}</td>
+                  <td *ngIf="userRole === 'admin'">
+                    <button
+                      nz-button
+                      nzType="primary"
+                      (click)="openModalUpdate(data)"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                      nz-button
+                      nzType="primary"
+                      (click)="showCerif(data)"
+                    >
+                      Afficher
+                    </button>
+                    <button
+                      nz-button
+                      (click)="deleteCertif(data._id)"
+                      nzType="default"
+                    >
+                      Supprimer
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search name"
+        [(ngModel)]="searchValue"
+      />
+      <button
+        nz-button
+        nzSize="small"
+        nzType="primary"
+        (click)="search()"
+        class="search-button"
+      >
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>
+<nz-modal
+  [nzWidth]="'80%'"
+  [(nzVisible)]="isVisible"
+  nzTitle="The first Modal"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="update"
+>
+</nz-modal
+><nz-modal
+  [nzWidth]="'80%'"
+  [(nzVisible)]="isVisibleShow"
+  nzTitle="The first Modal"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="show"
+>
+</nz-modal>
+<ng-template #add>
+  <form [formGroup]="validateForm" nz-form [nzLayout]="'vertical'">
+    <nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="6" nzFor="listemedicaments"
+          >Medicament</nz-form-label
+        >
+        <nz-form-control [nzSpan]="14">
+          <select
+            nz-input
+            name="listemedicaments"
+            type="listemedicaments"
+            formControlName="listemedicaments"
+            id="listemedicaments"
+          >
+            <option *ngFor="let item of medic" [value]="item.nom">
+              {{ item?.nom }}
+            </option>
+          </select>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="docteur">docteur</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <select
+          nz-input
+          name="docteur"
+          type="docteur"
+          formControlName="docteur"
+          id="docteur"
+        >
+          <option *ngFor="let item of doctors" [value]="item?.nom">
+            {{ item?.nom }}
+          </option>
+        </select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="dateconsultation"
+        >date consultation</nz-form-label
+      >
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="dateconsultation"
+          type="dateconsultation"
+          formControlName="dateconsultation"
+          id="dateconsultation"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="createdAt">createdAt</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-date-picker
+          name="fieldName"
+          ngDefaultControl
+          [(ngModel)]="date"
+          nzFormat="dd-MMM-yyy"
+          formControlName="createdAt"
+          name="createdAt"
+          type="createdAt"
+          id="createdAt"
+          (ngModelChange)="onChangeCreatDate($event)"
+        ></nz-date-picker>
+        <!-- <input nz-input name="createdAt" type="createdAt" id="createdAt" /> -->
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="updatedAt">updatedAt</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-date-picker
+          name="fieldName"
+          ngDefaultControl
+          [(ngModel)]="date"
+          nzFormat="dd-MMM-yyy"
+          name="updatedAt"
+          type="updatedAt"
+          formControlName="updatedAt"
+          id="updatedAt"
+          (ngModelChange)="onChangeCreatDate($event)"
+        ></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<ng-template #show>
+  <div
+    style="background: #ececec; padding: 30px"
+    *ngFor="let item of certif.listemedicaments; let i = index"
+  >
+    <div>
+      <div>
+        <nz-card nzTitle="{{ 'Medicament  ' + (i + 1) }}">
+          <p>{{ item.nom }}</p>
+        </nz-card>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #update>
+  <form [formGroup]="validateForm" nz-form>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="docteur">docteur</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <select
+          nz-input
+          name="docteur"
+          type="docteur"
+          formControlName="docteur"
+          id="docteur"
+        >
+          <option *ngFor="let item of doctors" [value]="item?.nom">
+            {{ item?.nom }}
+          </option>
+        </select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="listemedicaments"
+        >Medicament</nz-form-label
+      >
+      <nz-form-control [nzSpan]="14">
+        <select
+          nz-input
+          name="listemedicaments"
+          type="listemedicaments"
+          formControlName="listemedicaments"
+          id="listemedicaments"
+        >
+          <option *ngFor="let item of medic" [value]="item.nom">
+            {{ item?.nom }}
+          </option>
+        </select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="dateconsultation"
+        >dateconsultation</nz-form-label
+      >
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          name="dateconsultation"
+          type="dateconsultation"
+          formControlName="dateconsultation"
+          id="dateconsultation"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="createdAt">createdAt</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-date-picker
+          name="createdAt"
+          type="createdAt"
+          formControlName="createdAt"
+          id="createdAt"
+          (ngModelChange)="onChangeCreatDate($event)"
+          nzDisabled="true"
+        ></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzFor="updatedAt">updated At</nz-form-label>
+      <nz-date-picker
+        formControlName="updatedAt"
+        name="updatedAt"
+        (ngModelChange)="onChangeCreatDate($event)"
+        nzDisabled="true"
+      ></nz-date-picker>
+      <nz-form-control [nzSpan]="14"> </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<nz-modal
+  [(nzVisible)]="isVisibleUpdate"
+  nzTitle="The second Modal"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="add"
+>
+</nz-modal>
