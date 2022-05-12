@@ -6,8 +6,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -20,16 +18,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { APP_BASE_HREF } from '@angular/common';
 import { ErrorpageComponent } from './errorpage/errorpage.component';
 
-
-
-
-
 import { RecaptchaModule } from 'ng-recaptcha';
-
-
-
-
-
 
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { DeletePatientComponent } from './components/delete-patient/delete-patient.component';
@@ -39,7 +28,15 @@ import { ListPatientsComponent } from './components/list-patients/list-patients.
 import { PatientItemComponent } from './components/patient-item/patient-item.component';
 import { SearchPatientComponent } from './components/search-patient/search-patient.component';
 import { UpdatePatientComponent } from './components/update-patient/update-patient.component';
+import { ListMedecinComponent } from './components/list-medecin/list-medecin.component';
 
+//ngx moddule
+
+import {
+  DatatableComponent,
+  NgxDatatableModule,
+} from '@swimlane/ngx-datatable';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +55,8 @@ import { UpdatePatientComponent } from './components/update-patient/update-patie
     ListPatientsComponent,
     PatientItemComponent,
     SearchPatientComponent,
-    UpdatePatientComponent
+    UpdatePatientComponent,
+    ListMedecinComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,9 +65,15 @@ import { UpdatePatientComponent } from './components/update-patient/update-patie
     HttpClientModule,
     RecaptchaModule,
     SimpleNotificationsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxDatatableModule,
+    NgxChartsModule,
   ],
-  providers: [authInterceptorProviders,{provide: APP_BASE_HREF, useValue: '/'}],
-  bootstrap: [AppComponent]
+  providers: [
+    authInterceptorProviders,
+    { provide: APP_BASE_HREF, useValue: '/' },
+    DatatableComponent,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
